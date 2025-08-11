@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:14:57 by asando            #+#    #+#             */
-/*   Updated: 2025/08/07 18:38:08 by asando           ###   ########.fr       */
+/*   Updated: 2025/08/11 13:34:53 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,14 @@ int	main(int argc, char **argv)
 
 	i = 1;
 	stack_1 = NULL;
-	while (i < argc)
+	if (grab_arg(argc, argv, &stack_1))
+		//do a push swap algorithm
+		;
+	else
 	{
-		grab_arg(argv[i], &stack_1);
-		i++;
+		if (*stack)
+			stack_clean(*stack);
+		ft_printf("Error\n");
 	}
 	return (0);
 }
