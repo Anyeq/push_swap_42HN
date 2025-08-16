@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 16:37:10 by asando            #+#    #+#             */
-/*   Updated: 2025/08/11 14:30:45 by asando           ###   ########.fr       */
+/*   Updated: 2025/08/12 21:34:50 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,25 @@
 
 static int	inside_range(const char *s)
 {
+	long long res;
+	long long sign;
 
-}
-
-static int	is_double(const char *s)
-{
-
+	sign = 0;
+	res = 0;
+	while (*s && (*s == '-' || *s == '+'))
+	{
+		if (*s == '-')
+			sign = -1;
+		s++;
+	}
+	while (*s && *s >= '0' && *s <= '9')
+	{
+		res = res * 10 + ((*s - '0') * sign);
+		s++;
+	}
+	if (res <= 2147483647 && res >= -2147483648)
+		return (1);
+	return (0);
 }
 
 static int	is_valid(const char *s, char *tmp)
@@ -53,21 +66,21 @@ static int	parse_str_format(const char *s, t_stack **stack)
 {
 	char *res;
 	char *curr;
-	int	num;
 
 	res = NULL;
 	curr = s;
-	num = 0;
 	while (curr)
 	{
 		res = first_content(curr);
-		if (res && is_valid(res, curr))
+		if (res && is_valid(res, curr) && inside_range(res))
 		{
-			num = ft_atoi(res);
 			if (*stack == NULL)
-				*stack = stack_new(ft_atoi(s[i]));
+				*stack = stack_new(ft_atoi(res);
 			else
-				stack_add_back(ft_atoi(s[i]), *stack);
+			{
+				if (!stack_add_back(ft_atoi(res), *stack))
+					return (0);
+			}
 		}
 		else
 				return (0);
@@ -75,6 +88,7 @@ static int	parse_str_format(const char *s, t_stack **stack)
 	return (1);
 }
 
+//double, inside_range, malloc failed, is_valid
 int	grab_arg(int n_arg, char **s, t_stack **stack)
 {
 	int	i;
@@ -82,16 +96,9 @@ int	grab_arg(int n_arg, char **s, t_stack **stack)
 	i = 1;
 	while (i < n_arg)
 	{
-		if (is_valid(s[i]))
-		{
-			if (*stack == NULL)
-				*stack = stack_new(ft_atoi(s[i]));
-			else
-				stack_add_back(ft_atoi(s[i]), *stack);
-			i++;
-		}
-		else
+		if (parse_str_format(s[i], stack))
 			return (0);
+		i++;
 	}
 	return (1);
 }
