@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 18:32:01 by asando            #+#    #+#             */
-/*   Updated: 2025/08/12 21:02:23 by asando           ###   ########.fr       */
+/*   Updated: 2025/08/17 21:01:40 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,31 @@ t_stack	*stack_new(int content)
 int	stack_add_back(int content, t_stack **stack)
 {
 	t_stack	*new_node;
+	t_stack *curr;
 
-	new_node = stack_node(content);
+	new_node = stack_new(content);
+	curr = *stack;
 	if (!new_node)
-		return (0);
-	while (*stack && *stack->next)
+		return (-1);
+	while (curr && curr->next)
 	{
-		if (new_node->value == *stack->value)
-			return (0);
-		*stack = *stack->next;
+		if (new_node->value == curr->value)
+			return (-1);
+		curr = curr->next;
 	}
-	if (*stack)
+	if (curr)
 	{
-		*stack->next = new_node;
-		new_node->prev = *stack;
+		curr->next = new_node;
+		new_node->prev = curr;
 	}
 	else if (*stack == NULL)
 		*stack = new_node;
-	return (1);
+	return (0);
 }
 
 void	stack_add_front(int content, t_stack **stack)
 {
-	t_stack *new_node;
+	t_stack	*new_node;
 
 	new_node = stack_new(content);
 	if (*stack == NULL && new_node)
@@ -58,7 +60,7 @@ void	stack_add_front(int content, t_stack **stack)
 	else if (*stack && new_node)
 	{
 		new_node->next = *stack;
-		*stack->prev = new_node;
+		(*stack)->prev = new_node;
 		*stack = new_node;
 	}
 	return ;
@@ -66,8 +68,8 @@ void	stack_add_front(int content, t_stack **stack)
 
 void	stack_clean(t_stack **stack)
 {
-	t_stack *curr;
-	t_stack *to_delete;
+	t_stack	*curr;
+	t_stack	*to_delete;
 
 	curr = *stack;
 	to_delete = curr;

@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:13:16 by asando            #+#    #+#             */
-/*   Updated: 2025/08/11 12:58:12 by asando           ###   ########.fr       */
+/*   Updated: 2025/08/17 18:21:04 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "libft.h"
+# include "ft_printf.h"
 
 typedef struct s_stack 
 {
@@ -25,11 +26,11 @@ typedef struct s_stack
 }	t_stack;
 
 //main function
-void	grab_arg(char *arg);
+int	grab_arg(int n_arg, char **s, t_stack **stack);
 
 //stack utils function
 t_stack	*stack_new(int content);
-void	stack_add_back(int content, t_stack **stack);
+int	stack_add_back(int content, t_stack **stack);
 void	stack_add_front(int content, t_stack **stack);
-
+void	stack_clean(t_stack **stack);
 #endif
