@@ -6,17 +6,23 @@
 #    By: asando <asando@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/17 16:44:37 by asando            #+#    #+#              #
-#    Updated: 2025/08/17 18:20:07 by asando           ###   ########.fr        #
+#    Updated: 2025/08/17 21:55:34 by asando           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = cc
+CC ?= cc
 
 HEADER = includes
 
 LIBFT_HEADER = ./lib/libft/include
 
+DEBUG ?= 0
+
 CFLAGS = -Wall -Werror -Wextra -I$(HEADER) -I$(LIBFT_HEADER)
+
+ifeq ($(DEBUG), 1)
+	CFLAGS += -g -O0
+endif
 
 MAIN = main.c
 
@@ -34,7 +40,7 @@ OBJ_MAIN = $(MAIN:%.c=$(OBJ_DIR)/%.o)
 
 ALL_OBJS = $(OBJ_FILES) $(OBJ_MAIN)
 
-LIBFT_DIR = ./lib/libft/
+LIBFT_DIR = ./lib/libft
 
 FT_PRINTF_DIR = ./lib/libft/src/ft_printf
 
@@ -48,13 +54,14 @@ all: $(NAME)
 	@echo "Program is Compiled"
 
 $(NAME): $(ALL_OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) -o $@ $^ -L$(FT_PRINTF_DIR) -lftprintf -L$(LIBFT_DIR) -lft
+	@echo "All Object Files is ready"
+	@$(CC) $(CFLAGS) -o $@ $^ -L$(FT_PRINTF_DIR) -lftprintf -L$(LIBFT_DIR) -lft
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
@@ -67,9 +74,12 @@ clean:
 	@$(MAKE) clean -C $(LIBFT_DIR)
 
 fclean: clean
+	@echo "Program deleted"
 	@rm -rf $(NAME)
 	@$(MAKE) fclean -C $(LIBFT_DIR)
 
-re: fclean all
+re:
+	@$(MAKE) fclean
+	@$(MAKE) all
 
 .PHONY: all clean fclean re

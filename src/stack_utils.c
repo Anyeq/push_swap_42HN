@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 18:32:01 by asando            #+#    #+#             */
-/*   Updated: 2025/08/17 21:01:40 by asando           ###   ########.fr       */
+/*   Updated: 2025/08/17 22:45:55 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	stack_add_back(int content, t_stack **stack)
 			return (-1);
 		curr = curr->next;
 	}
+	if (new_node->value == curr->value)
+		return (-1);
 	if (curr)
 	{
 		curr->next = new_node;
