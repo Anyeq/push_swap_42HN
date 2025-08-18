@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 18:32:01 by asando            #+#    #+#             */
-/*   Updated: 2025/08/17 22:45:55 by asando           ###   ########.fr       */
+/*   Updated: 2025/08/18 15:44:18 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_stack	*stack_new(int content)
 int	stack_add_back(int content, t_stack **stack)
 {
 	t_stack	*new_node;
-	t_stack *curr;
+	t_stack	*curr;
 
 	new_node = stack_new(content);
 	curr = *stack;
@@ -40,7 +40,7 @@ int	stack_add_back(int content, t_stack **stack)
 			return (-1);
 		curr = curr->next;
 	}
-	if (new_node->value == curr->value)
+	if (curr && new_node->value == curr->value)
 		return (-1);
 	if (curr)
 	{
