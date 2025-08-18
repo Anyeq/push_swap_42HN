@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 16:37:10 by asando            #+#    #+#             */
-/*   Updated: 2025/08/17 22:58:25 by asando           ###   ########.fr       */
+/*   Updated: 2025/08/18 14:32:38 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	inside_range(char *s)
 	long long	res;
 	long long	sign;
 
-	sign = 0;
+	sign = 1;
 	res = 0;
 	while (*s && (*s == '-' || *s == '+'))
 	{
@@ -30,7 +30,7 @@ static int	inside_range(char *s)
 		res = res * 10 + ((*s - '0') * sign);
 		s++;
 	}
-	if (res <= 2147483647 && res >= -2147483648)
+	if (res <= 2147483647LL && res >= -2147483648LL)
 		return (0);
 	return (-1);
 }
@@ -60,6 +60,8 @@ static char	*first_content(char *s)
 		s++;
 	if (*s)
 		return (s);
+	else
+		return (s);
 	return (NULL);
 }
 
@@ -73,6 +75,8 @@ static int	parse_str_format(char *s, t_stack **stack)
 	while (*curr)
 	{
 		res = first_content(curr);
+		if (!(*res))
+			return (0);
 		if (res && is_valid(res, &curr) == 0 && inside_range(res) == 0)
 		{
 			if (*stack == NULL)
