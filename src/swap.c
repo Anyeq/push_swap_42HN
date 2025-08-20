@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:25:06 by asando            #+#    #+#             */
-/*   Updated: 2025/08/20 21:13:15 by asando           ###   ########.fr       */
+/*   Updated: 2025/08/20 21:19:04 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	swap_pa(t_stack **stack)
 	first = *stack;
 	second = NULL;
 	tail = NULL;
-	if (stack && *stack && (*stack)->next == *stack)
+	if (stack == NULL && *stack == NULL && (*stack)->next == *stack)
 		return (-1);
 	second = first->next;
 	*stack = second;
@@ -46,7 +46,7 @@ static int	swap_pb(t_stack **stack)
 	first = *stack;
 	second = NULL;
 	tail = NULL;
-	if (stack && *stack && (*stack)->prev == *stack)
+	if (stack == NULL && *stack == NULL && (*stack)->prev == *stack)
 		return (-1);
 	second = first->prev;
 	*stack = second;
@@ -70,4 +70,5 @@ void	swap_ps(t_stack **stack_1, t_stack **stack_2, t_swap_flag flag)
 		ft_printf("sb\n");
 	else if ((flag & SS) && swap_pa(stack_1) == 0 && swap_pb(stack_2) == 0)
 		ft_printf("ss\n");
+	return ;
 }
