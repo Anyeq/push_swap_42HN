@@ -6,13 +6,13 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 16:01:33 by asando            #+#    #+#             */
-/*   Updated: 2025/08/18 19:01:24 by asando           ###   ########.fr       */
+/*   Updated: 2025/08/18 21:32:14 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push_pa(t_stack **stack_1, t_stack **stack_2)
+static void	push_pa(t_stack **stack_1, t_stack **stack_2)
 {
 	t_stack *curr;
 
@@ -26,7 +26,7 @@ void	push_pa(t_stack **stack_1, t_stack **stack_2)
 		curr->next = NULL;
 		curr->prev = NULL;
 	}
-	else
+	else if (*stack_1 != NULL)
 	{
 		*stack_1->prev = curr;
 		curr->next = *stack_1;
@@ -36,7 +36,7 @@ void	push_pa(t_stack **stack_1, t_stack **stack_2)
 	ft_printf("pa\n");
 }
 
-void	push_pb(t_stack **stack_1, t_stack **stack_2)
+static void	push_pb(t_stack **stack_1, t_stack **stack_2)
 {
 	t_stack *curr;
 

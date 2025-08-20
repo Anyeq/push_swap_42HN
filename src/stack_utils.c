@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 18:32:01 by asando            #+#    #+#             */
-/*   Updated: 2025/08/18 15:44:18 by asando           ###   ########.fr       */
+/*   Updated: 2025/08/20 19:54:27 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,48 +25,83 @@ t_stack	*stack_new(int content)
 	return (new_node);
 }
 
-int	stack_add_back(int content, t_stack **stack)
+static int	check_double(int content, t_stack **stack, t_stack **new_node)
 {
-	t_stack	*new_node;
 	t_stack	*curr;
 
-	new_node = stack_new(content);
 	curr = *stack;
-	if (!new_node)
-		return (-1);
-	while (curr && curr->next)
+	while (curr->next != *stack)
 	{
-		if (new_node->value == curr->value)
+		if (curr->value == content)
+		{
+			free(*new_node);
 			return (-1);
+		}
 		curr = curr->next;
 	}
-	if (curr && new_node->value == curr->value)
-		return (-1);
-	if (curr)
+	if (curr->value == content)
 	{
-		curr->next = new_node;
-		new_node->prev = curr;
+		free(*new_node);
+		return (-1);
 	}
-	else if (*stack == NULL)
-		*stack = new_node;
 	return (0);
 }
 
-void	stack_add_front(int content, t_stack **stack)
+int	stack_add_back(int content, t_stack **stack)
 {
 	t_stack	*new_node;
+	t_stack	*tail;
 
 	new_node = stack_new(content);
-	if (*stack == NULL && new_node)
-		*stack = new_node;
-	else if (*stack && new_node)
+	tail = *stack;
+	if (!new_node)
+		return (-1);
+	if (tail == NULL)
 	{
-		new_node->next = *stack;
-		(*stack)->prev = new_node;
 		*stack = new_node;
+		(*stack)->next = new_node;
+		(*stack)->prev = new_node;
 	}
-	return ;
+	else
+	{
+		if (check_double(content, stack, &new_node) == -1)
+			return (-1);
+		tail = (*stack)->prev;
+		new_node->next = *stack;
+		new_node->prev = tail;
+		tail->next = new_node;
+		(*stack)->prev = new_node;
+	}
+	return (0);
 }
+
+//int	stack_add_front(int content, t_stack **stack)
+//{
+//	t_stack	*new_node;
+//	t_stack	*curr;
+//
+//	new_node = stack_new(content);
+//	curr = *stack;
+//	if (!new_node)
+//		return (-1);
+//	if (*stack == NULL)
+//		*stack = new_node;
+//	else if (*stack)
+//	{
+//		while (curr && curr->next != *stack)
+//		{
+//			if (new_node->value == curr->value)
+//				return (-1);
+//			if (curr->next == NULL)
+//				break ;
+//			curr = curr->next;
+//		}
+//		new_node->next = *stack;
+//		(*stack)->prev = new_node;
+//		*stack = new_node;
+//	}
+//	return ;
+//}
 
 void	stack_clean(t_stack **stack)
 {
@@ -75,12 +110,13 @@ void	stack_clean(t_stack **stack)
 
 	curr = *stack;
 	to_delete = curr;
-	while (curr)
+	while (curr && curr->next != *stack)
 	{
 		to_delete = curr;
 		curr = curr->next;
 		free(to_delete);
 	}
-	*stack = curr;
+	free(curr);
+	*stack = NULL;
 	return ;
 }

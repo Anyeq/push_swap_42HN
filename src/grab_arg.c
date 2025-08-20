@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 16:37:10 by asando            #+#    #+#             */
-/*   Updated: 2025/08/18 14:32:38 by asando           ###   ########.fr       */
+/*   Updated: 2025/08/20 19:57:24 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,7 @@ static int	parse_str_format(char *s, t_stack **stack)
 			return (0);
 		if (res && is_valid(res, &curr) == 0 && inside_range(res) == 0)
 		{
-			if (*stack == NULL)
-			{
-				*stack = stack_new(ft_atoi(res));
-				if (*stack == NULL)
-					return (-1);
-			}
-			else if (stack_add_back(ft_atoi(res), stack) < 0)
+			if (stack_add_back(ft_atoi(res), stack) < 0)
 				return (-1);
 		}
 		else
