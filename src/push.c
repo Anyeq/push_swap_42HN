@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 16:01:33 by asando            #+#    #+#             */
-/*   Updated: 2025/08/20 22:12:42 by asando           ###   ########.fr       */
+/*   Updated: 2025/08/21 17:04:36 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,15 @@ static t_stack	*pop_front(t_stack **stack)
 	return (first);
 }
 
-static void	push_pa(t_stack **stack_1, t_stack **stack_2)
+static void	push_a(t_stack **stack_1, t_stack **stack_2)
 {
 	t_stack *tail;
 	t_stack	*to_pushed;
 
 	to_pushed = pop_back(stack_2);
 	tail = *stack_1;
+	if (to_pushed == NULL)
+		return ;
 	if (*stack_1 == NULL)
 	{
 		*stack_1 = to_pushed;
@@ -93,15 +95,18 @@ static void	push_pa(t_stack **stack_1, t_stack **stack_2)
 		*stack_1 = to_pushed;
 	}
 	ft_printf("pa\n");
+	return ;
 }
 
-static void	push_pb(t_stack **stack_1, t_stack **stack_2)
+static void	push_b(t_stack **stack_1, t_stack **stack_2)
 {
 	t_stack *tail;
 	t_stack	*to_pushed;
 
 	to_pushed = pop_front(stack_1);
 	tail = *stack_2;
+	if (to_pushed == NULL)
+		return ;
 	if (*stack_2 == NULL)
 	{
 		*stack_2 = to_pushed;
@@ -118,13 +123,14 @@ static void	push_pb(t_stack **stack_1, t_stack **stack_2)
 		*stack_2 = to_pushed;
 	}
 	ft_printf("pb\n");
+	return ;
 }
 
-void	push_ps(t_stack **stack_1, t_stack **stack_2, t_push_flag flag)
+void	push_ps(t_stack **stack_1, t_stack **stack_2, t_op_flag flag)
 {
-	if ((flag & PA) && *stack_2)
-		push_pa(stack_1, stack_2);
-	else if ((flag & PB) && *stack_1)
-		push_pb(stack_1, stack_2);
+	if (flag & PA)
+		push_a(stack_1, stack_2);
+	else if (flag & PB)
+		push_b(stack_1, stack_2);
 	return ;
 }

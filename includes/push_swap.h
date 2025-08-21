@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:13:16 by asando            #+#    #+#             */
-/*   Updated: 2025/08/18 19:06:02 by asando           ###   ########.fr       */
+/*   Updated: 2025/08/21 16:07:25 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,20 @@ typedef struct s_stack
 	struct s_stack	*prev;
 }	t_stack;
 
-typedef enum e_swap_flag
+typedef enum e_op_flag
 {
 	SA = 1 << 0,
 	SB = 1 << 1,
-	SS = 1 << 2
-}	t_swap_flag;
-
-typedef enum e_push_flag
-{
-	PA = 1 << 0,
-	PB = 1 << 1
-}	t_push_flag;
+	SS = SA & SB,
+	PA = 1 << 2,
+	PB = 1 << 3,
+	RA = 1 << 4,
+	RB = 1 << 5,
+	RR = RA & RB,
+	RRA = 1 << 6,
+	RRB = 1 << 7,
+	RRR = RRA & RRB
+}	t_op_flag;
 
 //main function
 int		grab_arg(int n_arg, char **s, t_stack **stack);

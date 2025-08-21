@@ -6,13 +6,13 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:25:06 by asando            #+#    #+#             */
-/*   Updated: 2025/08/20 21:19:04 by asando           ###   ########.fr       */
+/*   Updated: 2025/08/21 17:03:53 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	swap_pa(t_stack **stack)
+static int	swap_a(t_stack **stack)
 {
 	t_stack	*first;
 	t_stack	*second;
@@ -37,7 +37,7 @@ static int	swap_pa(t_stack **stack)
 	return (0);
 }
 
-static int	swap_pb(t_stack **stack)
+static int	swap_b(t_stack **stack)
 {
 	t_stack	*first;
 	t_stack	*second;
@@ -62,13 +62,27 @@ static int	swap_pb(t_stack **stack)
 	return (0);
 }
 
-void	swap_ps(t_stack **stack_1, t_stack **stack_2, t_swap_flag flag)
+void	swap_ps(t_stack **stack_1, t_stack **stack_2, t_op_flag flag)
 {
-	if ((flag & SA) && swap_pa(stack_1) == 0)
-		ft_printf("sa\n");
-	else if ((flag & SB) && swap_pb(stack_2) == 0)
-		ft_printf("sb\n");
-	else if ((flag & SS) && swap_pa(stack_1) == 0 && swap_pb(stack_2) == 0)
-		ft_printf("ss\n");
+	if (flag & SA)
+	{
+		if (swap_pa(stack_1) == 0)
+			ft_printf("sa\n");
+	}
+	else if (flag & SB)
+	{
+		if (swap_pb(stack_2) == 0)
+			ft_printf("sb\n");
+	}
+	else if (flag & SS)
+	{
+		int	swp_a;
+		int	swp_b;
+
+		swp_a = swap_a(stack_1);
+		swp_b = swap_b(stack_2);
+		if (swp_a == 0 && swp_b == 0)
+			ft_printf("ss\n");
+	}
 	return ;
 }
