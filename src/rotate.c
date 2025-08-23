@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 19:07:00 by asando            #+#    #+#             */
-/*   Updated: 2025/08/23 16:11:38 by asando           ###   ########.fr       */
+/*   Updated: 2025/08/23 16:54:21 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,6 @@ static int	rotate_ps(t_stack **stack)
 	*stack = (*stack)->next;
 	return (0);
 }
-
-//static int	rotate_b(t_stack **stack)
-//{
-//	if (stack == NULL || *stack == NULL || (*stack)->prev == *stack)
-//		return (-1);
-//	*stack = (*stack)->prev;
-//	return (0);
-//}
 
 void	rotate(t_stack **stack_1, t_stack **stack_2, t_op_flag flag)
 {
