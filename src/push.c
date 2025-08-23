@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 16:01:33 by asando            #+#    #+#             */
-/*   Updated: 2025/08/21 17:04:36 by asando           ###   ########.fr       */
+/*   Updated: 2025/08/23 16:22:50 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_stack	*pop_back(t_stack **stack)
 
 	first = *stack;
 	tail = NULL;
-	if (stack == NULL && *stack == NULL)
+	if (stack == NULL || *stack == NULL)
 		return (first);
 	if ((first)->prev == *stack)
 	{
@@ -48,8 +48,8 @@ static t_stack	*pop_front(t_stack **stack)
 
 	first = *stack;
 	tail = NULL;
-	if (stack == NULL && *stack == NULL)
-		return NULL;
+	if (stack == NULL || *stack == NULL)
+		return (NULL);
 	if ((first)->next == *stack)
 	{
 		*stack = NULL;
@@ -72,7 +72,7 @@ static t_stack	*pop_front(t_stack **stack)
 
 static void	push_a(t_stack **stack_1, t_stack **stack_2)
 {
-	t_stack *tail;
+	t_stack	*tail;
 	t_stack	*to_pushed;
 
 	to_pushed = pop_back(stack_2);
@@ -98,9 +98,36 @@ static void	push_a(t_stack **stack_1, t_stack **stack_2)
 	return ;
 }
 
+static void	push_ps(t_stack **stack_dest, t_stack **stack_src)
+{
+	t_stack	*tail;
+	t_stack	*to_pushed;
+
+	to_pushed = pop_front(stack_src);
+	tail = *stack_dest;
+	if (to_pushed == NULL)
+		return ;
+	if (*stack_dest == NULL)
+	{
+		*stack_dest = to_pushed;
+		(*stack_dest)->next = to_pushed;
+		(*stack_dest)->prev = to_pushed;
+	}
+	else
+	{
+		tail = (*stack_dest)->prev;
+		to_pushed->next = *stack_dest;
+		to_pushed->prev = tail;
+		tail->next = to_pushed;
+		(*stack_dest)->prev = to_pushed;
+		*stack_dest = to_pushed;
+	}
+	return ;
+}
+
 static void	push_b(t_stack **stack_1, t_stack **stack_2)
 {
-	t_stack *tail;
+	t_stack	*tail;
 	t_stack	*to_pushed;
 
 	to_pushed = pop_front(stack_1);
@@ -126,11 +153,17 @@ static void	push_b(t_stack **stack_1, t_stack **stack_2)
 	return ;
 }
 
-void	push_ps(t_stack **stack_1, t_stack **stack_2, t_op_flag flag)
+void	push(t_stack **stack_1, t_stack **stack_2, t_op_flag flag)
 {
 	if (flag & PA)
-		push_a(stack_1, stack_2);
+	{
+		push_ab(stack_1, stack_2);
+		ft_printf("pa\n");
+	}
 	else if (flag & PB)
-		push_b(stack_1, stack_2);
+	{
+		push_ab(stack_2, stack_1);
+		ft_printf("pb\n");
+	}
 	return ;
 }

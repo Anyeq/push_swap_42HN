@@ -6,15 +6,47 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:14:57 by asando            #+#    #+#             */
-/*   Updated: 2025/08/18 16:01:11 by asando           ###   ########.fr       */
+/*   Updated: 2025/08/21 17:55:56 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push_swap(t_stack **stack_1, t_stack **stack_2)
-{
+//void	push_swap(t_stack **stack_1, t_stack **stack_2)
+//{
+//
+//	return ;
+//}
 
+static void	print_stack(t_stack **stack_1, t_stack **stack_2)
+{
+	int	arr_1[10] = {0};
+	int	arr_2[10] = {0};
+	t_stack	*curr;
+	int	i = 0;
+
+	curr = *stack_1;
+	while (curr && curr->next != *stack_1)
+	{
+		arr_1[i] = curr->value;
+		curr = curr->next;
+		i++;
+	}
+	arr_1[i] = curr->value;
+	curr = *stack_2;
+	i = 0;
+	while (curr && curr->next != *stack_2)
+	{
+		arr_2[i] = curr->value;
+		curr = curr->next;
+	}
+	//arr_2[i] = curr->value;
+	i = 0;
+	while (i < 10)
+	{
+		ft_printf("%d	%d\n", arr_1[i], arr_2[i]);
+		i++;
+	}
 	return ;
 }
 
@@ -22,15 +54,17 @@ int	main(int argc, char **argv)
 {
 	t_stack	*stack_1;
 	t_stack	*stack_2;
-	t_stack	*curr;
+	//t_stack	*curr;
 
 	stack_1 = NULL;
 	stack_2 = NULL;
 	if (grab_arg(argc, argv, &stack_1) == 0)
 	{
-		push_swap(&stack_1, &stack_2);
-		//curr = stack_1;
-		//while (curr)
+		//push_swap(&stack_1, &stack_2);
+		print_stack(&stack_1, &stack_2);	
+		//swap_ps(&stack_1, &stack_2, SS);
+		push_ps(&stack_1, &stack_2, PB);
+		print_stack(&stack_1, &stack_2);	
 		//{
 		//	ft_printf("%d\n", curr->value);
 		//	curr = curr->next;

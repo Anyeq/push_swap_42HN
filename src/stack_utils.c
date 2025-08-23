@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 18:32:01 by asando            #+#    #+#             */
-/*   Updated: 2025/08/21 17:15:30 by asando           ###   ########.fr       */
+/*   Updated: 2025/08/21 17:29:44 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	check_double(int content, t_stack **stack, t_stack **new_node)
 		}
 		curr = curr->next;
 	}
-	if (curr->value == content)
+	if (curr && curr->value == content)
 	{
 		free(*new_node);
 		return (-1);
@@ -88,7 +88,8 @@ void	stack_clean(t_stack **stack)
 		curr = curr->next;
 		free(to_delete);
 	}
-	free(curr);
+	if (curr)
+		free(curr);
 	*stack = NULL;
 	return ;
 }

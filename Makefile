@@ -6,7 +6,7 @@
 #    By: asando <asando@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/17 16:44:37 by asando            #+#    #+#              #
-#    Updated: 2025/08/17 21:55:34 by asando           ###   ########.fr        #
+#    Updated: 2025/08/21 17:34:01 by asando           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ MAIN = main.c
 
 SRC_DIR = src
 
-SRCS = grab_arg.c stack_utils.c
+SRCS = grab_arg.c stack_utils.c swap.c push.c rotate.c reverse_rotate.c
 
 SRC_FILES = $(addprefix $(SRC_DIR)/, $(SRCS))
 

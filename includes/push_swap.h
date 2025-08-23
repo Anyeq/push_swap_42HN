@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:13:16 by asando            #+#    #+#             */
-/*   Updated: 2025/08/21 16:07:25 by asando           ###   ########.fr       */
+/*   Updated: 2025/08/23 16:14:03 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,15 @@ typedef enum e_op_flag
 {
 	SA = 1 << 0,
 	SB = 1 << 1,
-	SS = SA & SB,
+	SS = SA || SB,
 	PA = 1 << 2,
 	PB = 1 << 3,
 	RA = 1 << 4,
 	RB = 1 << 5,
-	RR = RA & RB,
+	RR = RA || RB,
 	RRA = 1 << 6,
 	RRB = 1 << 7,
-	RRR = RRA & RRB
+	RRR = RRA || RRB
 }	t_op_flag;
 
 //main function
@@ -45,8 +45,14 @@ int		grab_arg(int n_arg, char **s, t_stack **stack);
 
 //stack utils function
 t_stack	*stack_new(int content);
-void	stack_add_front(int content, t_stack **stack);
+//void	stack_add_front(int content, t_stack **stack);
 void	stack_clean(t_stack **stack);
 int		stack_add_back(int content, t_stack **stack);
+
+//operation function
+void	swap(t_stack **stack_1, t_stack **stack_2, t_op_flag flag);
+void	push(t_stack **stack_1, t_stack **stack_2, t_op_flag flag);
+void	rotate(t_stack **stack_1, t_stack **stack_2, t_op_flag flag);
+void	reverse_rotate(t_stack **stack_1, t_stack **stack_2, t_op_flag flag);
 
 #endif
