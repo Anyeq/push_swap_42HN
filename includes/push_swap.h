@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:13:16 by asando            #+#    #+#             */
-/*   Updated: 2025/08/23 16:14:03 by asando           ###   ########.fr       */
+/*   Updated: 2025/08/23 17:24:45 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 typedef struct s_stack
 {
 	int				value;
+	int				index;
 	struct s_stack	*next;
 	struct s_stack	*prev;
 }	t_stack;
@@ -47,6 +48,7 @@ int		grab_arg(int n_arg, char **s, t_stack **stack);
 t_stack	*stack_new(int content);
 //void	stack_add_front(int content, t_stack **stack);
 void	stack_clean(t_stack **stack);
+size_t	stack_size(t_stack **stack);
 int		stack_add_back(int content, t_stack **stack);
 
 //operation function
