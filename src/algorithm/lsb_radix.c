@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 16:59:59 by asando            #+#    #+#             */
-/*   Updated: 2025/08/24 22:50:52 by asando           ###   ########.fr       */
+/*   Updated: 2025/08/25 14:59:56 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,47 @@ static int	add_index(int *arr, t_stack **stack, int len)
 	return (0);
 }
 
+static int	bit_size(unsigned int n)
+{
+	int	count_bit;
+
+	count_bit = 0;
+	while (n > 0)
+	{
+		count_bit++;
+		n = n >> 1;
+	}
+	return (count_bit);
+}
+
 int	lsb_radix(t_stack **stack_1, t_stack **stack_2)
 {
 	int	*arr;
 	int	len_stack;
+	int	bit_len;
+	t_stack	*curr;
 
+	curr = *stack_1;
 	len_stack = stack_size(stack_1);
 	arr = store_to_array(stack_1);
+	bit_len = bit_size(len_stack);
 	if (add_index(arr, stack_1, len_stack) == -1)
 		return (-1);
+	int	i;
+	i = 0;
+	while (i < bit_len)
+	{
+		while (j < len_stack)
+		{
+			if (curr->index & (1 << i) == 0)
+				//do pb;
+			else
+				//do ra
+			curr = curr->next;
+			j++;
+		}
+		//send all back to stack_1;
+		i++;
+	}
 	return (0);
 }
