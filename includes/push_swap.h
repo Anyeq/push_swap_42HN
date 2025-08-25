@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:13:16 by asando            #+#    #+#             */
-/*   Updated: 2025/08/25 15:22:32 by asando           ###   ########.fr       */
+/*   Updated: 2025/08/25 22:59:48 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <unistd.h>
 # include "libft.h"
 # include "ft_printf.h"
-# include "merge_sort.h"
 
 typedef struct s_stack
 {
@@ -54,9 +53,11 @@ int		stack_add_back(int content, t_stack **stack);
 //operation function
 void	swap(t_stack **stack_1, t_stack **stack_2, t_op_flag flag);
 void	push(t_stack **stack_1, t_stack **stack_2, t_op_flag flag);
+void	push_all(t_stack **stack_1, t_stack **stack_2, t_op_flag flag);
 void	rotate(t_stack **stack_1, t_stack **stack_2, t_op_flag flag);
 void	reverse_rotate(t_stack **stack_1, t_stack **stack_2, t_op_flag flag);
 
 //algorithm function
+int		radix(t_stack **stack_1, t_stack **stack_2);
 
 #endif

@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lsb_radix.c                                        :+:      :+:    :+:   */
+/*   radix.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 16:59:59 by asando            #+#    #+#             */
-/*   Updated: 2025/08/25 17:30:47 by asando           ###   ########.fr       */
+/*   Updated: 2025/08/26 00:28:28 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "merge_sort.h"
 
 static int	*store_to_array(t_stack **stack, int len_stack)
 {
@@ -20,7 +21,7 @@ static int	*store_to_array(t_stack **stack, int len_stack)
 
 	i = 0;
 	curr = *stack;
-	arr_value = malloc(sizeof(int) * size);
+	arr_value = malloc(sizeof(int) * len_stack);
 	if (arr_value == NULL)
 		return (NULL);
 	if (stack == NULL || *stack == NULL)
@@ -28,7 +29,7 @@ static int	*store_to_array(t_stack **stack, int len_stack)
 		free(arr_value);
 		return (NULL);
 	}
-	while (i < size)
+	while (i < len_stack)
 	{
 		arr_value[i++] = curr->value;
 		curr = curr->next;
@@ -58,14 +59,14 @@ static int	binary_search(int *arr, int len, int target)
 	return (-1);
 }
 
-static int	add_index(int *arr, t_stack **stack, int len)
+static int	add_index(t_stack **stack, int len)
 {
 	t_stack	*curr;
 	int		*arr;
 	int		idx;
 
 	idx = 0;
-	arr = store_to_array(stack_1);
+	arr = store_to_array(stack, len);
 	curr = *stack;
 	if (arr != NULL && merge_sort(arr, 0, len - 1) == 0)
 	{
@@ -76,7 +77,7 @@ static int	add_index(int *arr, t_stack **stack, int len)
 			curr = curr->next;
 		}
 		if (curr)
-			idx = binary_search(arr, len, curr->value);
+			curr->index = binary_search(arr, len, curr->value);
 		free(arr);
 	}
 	else
@@ -90,24 +91,23 @@ static int	add_index(int *arr, t_stack **stack, int len)
 static void	lsb_radix(t_stack **stack_1, t_stack **stack_2, int bit_len,
 	int len_stack)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	j = 0;
 	i = 0;
 	while (i < bit_len)
 	{
-		while (j < len_stack)
+		j = 0;
+		while (j < len_stack && *stack_1)
 		{
-			if ((curr->index & (1 << i)) == 0)
+			if (((*stack_1)->index & (1 << i)) == 0)
 				push(stack_1, stack_2, PB);
 			else
 				rotate(stack_1, stack_2, RA);
-			curr = curr->next;
 			j++;
 		}
 		push_all(stack_1, stack_2, PA);
-		curr = *stack_1;
 		i++;
 	}
 	return ;
@@ -117,13 +117,14 @@ int	radix(t_stack **stack_1, t_stack **stack_2)
 {
 	int		len_stack;
 	int		bit_len;
-	t_stack	*curr;
 	int		max_index;
 
-	curr = *stack_1;
 	len_stack = stack_size(stack_1);
 	bit_len = 0;
 	max_index = len_stack;
+	//only for test
+	//if (*stack_2 != NULL)
+	//	return (-1);
 	while (max_index > 0)
 	{
 		bit_len++;

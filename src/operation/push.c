@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 16:01:33 by asando            #+#    #+#             */
-/*   Updated: 2025/08/25 16:21:52 by asando           ###   ########.fr       */
+/*   Updated: 2025/08/25 23:22:35 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,28 +85,14 @@ void	push(t_stack **stack_1, t_stack **stack_2, t_op_flag flag)
 
 void	push_all(t_stack **stack_1, t_stack **stack_2, t_op_flag flag)
 {
-	t_stack	*curr;
-
-	curr = *stack_1;
 	if (flag & PA)
 	{
-		curr = *stack_2;
-		while (stack_2 && curr && curr->next != *stack_2)
-		{
-			push(stack_1, stack_2, PA);
-			curr = curr->next;
-		}
-		if (curr)
+		while (*stack_2)
 			push(stack_1, stack_2, PA);
 	}
 	else if (flag & PB)
 	{
-		while (stack_1 && curr && curr->next != *stack_1)
-		{
-			push(stack_1, stack_2, PB);
-			curr = curr->next;
-		}
-		if (curr)
+		while (*stack_1)
 			push(stack_1, stack_2, PB);
 	}
 	return ;
