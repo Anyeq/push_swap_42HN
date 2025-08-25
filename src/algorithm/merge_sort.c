@@ -6,27 +6,25 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 20:09:43 by asando            #+#    #+#             */
-/*   Updated: 2025/08/24 21:36:36 by asando           ###   ########.fr       */
+/*   Updated: 2025/08/25 17:28:05 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "merge_sort.h"
 
 static void	copy_arr(t_merge *mg)
 {
 	int	i;
 	int	j;
-	int	k;
 
 	i = 0;
 	j = 0;
-	k = 0;
 	while (i < (mg->mid - mg->left + 1))
 	{
 		mg->left_arr[i] = mg->arr[mg->left + i];
 		i++;
 	}
-	while (j < (mg->right- mg->mid))
+	while (j < (mg->right - mg->mid))
 	{
 		mg->right_arr[j] = mg->arr[mg->mid + 1 + j];
 		j++;

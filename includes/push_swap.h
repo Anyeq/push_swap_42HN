@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:13:16 by asando            #+#    #+#             */
-/*   Updated: 2025/08/23 17:24:45 by asando           ###   ########.fr       */
+/*   Updated: 2025/08/25 15:22:32 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include "libft.h"
 # include "ft_printf.h"
+# include "merge_sort.h"
 
 typedef struct s_stack
 {
@@ -46,7 +47,6 @@ int		grab_arg(int n_arg, char **s, t_stack **stack);
 
 //stack utils function
 t_stack	*stack_new(int content);
-//void	stack_add_front(int content, t_stack **stack);
 void	stack_clean(t_stack **stack);
 size_t	stack_size(t_stack **stack);
 int		stack_add_back(int content, t_stack **stack);
@@ -56,5 +56,7 @@ void	swap(t_stack **stack_1, t_stack **stack_2, t_op_flag flag);
 void	push(t_stack **stack_1, t_stack **stack_2, t_op_flag flag);
 void	rotate(t_stack **stack_1, t_stack **stack_2, t_op_flag flag);
 void	reverse_rotate(t_stack **stack_1, t_stack **stack_2, t_op_flag flag);
+
+//algorithm function
 
 #endif
