@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 13:56:20 by asando            #+#    #+#             */
-/*   Updated: 2025/09/13 20:51:25 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/13 23:49:38 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ static t_stack	*find_to_push(t_stack **stack)
 
 	cheapest_node = *stack;
 	current = *stack;
-	while (current->next != *stack)
+	while (current)
 	{
 		if (current->push_cost < cheapest_node->push_cost)
 			cheapest_node = current;
 		current = current->next;
+		if (current == *stack)
+			break ;
 	}
-	if (current->push_cost < cheapest_node->push_cost)
-		cheapest_node = current;
 	return (cheapest_node);
 }
 
@@ -45,17 +45,32 @@ static void	move_to_top(t_stack **stack_1, t_stack **stack_2,
 	return ;
 }
 
-//working on this
-int	last_move_check(t_stack **stack)
+int	check_sorted_list(t_stack **stack)
 {
-	t_stack *first;
+	t_stack	*current;
+
+	current = *stack;
+	if (stack == NULL || *stack == NULL)
+		return (-1);
+	while (current->next != *stack)
+	{
+		if (current->value > (current->next)->value)
+			return (-1);
+		current = current->next;
+	}
+	return (0);
+}
+
+void	last_move(t_stack **stack)
+{
+	t_stack	*first;
 
 	first = min_value(stack);
 	while (first != *stack && first->above_midi)
 		rotate(stack, NULL, RA);
 	while (first != *stack && first->above_midi == 0)
 		reverse_rotate(stack, NULL, RRA);
-	return (1);
+	return ;
 }
 
 //check if rotate update the while condition stack address

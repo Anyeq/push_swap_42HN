@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:14:57 by asando            #+#    #+#             */
-/*   Updated: 2025/09/12 20:36:13 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/13 23:38:10 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,10 @@ int	main(int argc, char **argv)
 
 	stack_1 = NULL;
 	stack_2 = NULL;
-	// grab_arg could return how many element is there
-	// from this we can reduce number of checking
-	// work for smal data 3, 5, less then 20.
-	// check edge cases where it should turn error
 	if (grab_arg(argc, argv, &stack_1) == 0)
 	{
-		if (radix(&stack_1, &stack_2) == -1)
+		if (turk_algo(&stack_1, &stack_2) == -1)
 			write(2, "Error in processing the stack!\n", 31);
-		//push_swap(&stack_1, &stack_2);
 		//print_stack(&stack_1, &stack_2);	
 		//swap_ps(&stack_1, &stack_2, SS);
 		//push(&stack_1, &stack_2, PB);
@@ -55,6 +50,5 @@ int	main(int argc, char **argv)
 		write(2, "Error!\n", 7);
 	if (stack_1)
 		stack_clean(&stack_1);
-	// Error will lounch error massage in fd 2 STDERR
 	return (0);
 }

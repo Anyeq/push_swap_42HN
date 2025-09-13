@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 18:12:15 by asando            #+#    #+#             */
-/*   Updated: 2025/09/13 15:01:23 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/13 23:22:03 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,20 @@ void	set_middle_index(t_stack **stack)
 
 	i = 0;
 	current = *stack;
-	if (*stack == NULL)
+	if (stack || *stack == NULL)
 		return ;
 	len_stack = stack_size(stack);
 	middle_index = len_stack / 2;
 	while (current->next != *stack)
 	{
 		current->current_index = i;
-		if (i++ <= median)
+		if (i++ <= middle_index)
 			current->above_midi = 1;
 		else
 			current->above_midi = 0;
 		current = current->next;
 	}
+	current->current_index = i;
 	current->above_midi = 0;
 	return ;
 }
@@ -105,7 +106,7 @@ static void	set_push_cost(t_stack **stack_1, t_stack **stack_2)
 	current = *stack_1;
 	len_stack_1 = stack_size(stack_1);
 	len_stack_2 = stack_size(stack_2);
-	while (current->next != *stack_1)
+	while (current)
 	{
 		current->push_cost = current->current_index;
 		if (current->above_midi == 0)
@@ -115,12 +116,9 @@ static void	set_push_cost(t_stack **stack_1, t_stack **stack_2)
 		else if (current->target->above_midi == 0)
 			current->push_cost += len_stack_2 - current->target->current_index;
 		current = current->next;
+		if (current == *stack_1)
+			break ;
 	}
-	current->push_cost = len_stack_1 - current->current_index;
-	if (current->target->above_midi)
-		current->push_cost += current->target->current_index;
-	else if (current->target->above_midi == 0)
-		current->push_cost += len_stack_2 - current->target->current_index;
 	return ;
 }
 
@@ -128,10 +126,10 @@ void	init_stack(t_stack **stack_1, t_stack **stack_2, int direction)
 {
 	set_middle_index(stack_1);
 	set_middle_index(stack_2);
-	if (direction == 0)
+	if (direction == 1)
 	{
 		set_target_a(stack_1, stack_2, LONG_MIN);
-		set_push_cost(stack_2);
+		set_push_cost(stack_1, stack_2);
 	}
 	else
 		set_target_b(stack_1, stack_2, LONG_MAX);
