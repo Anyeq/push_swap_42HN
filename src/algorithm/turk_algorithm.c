@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 15:33:57 by asando            #+#    #+#             */
-/*   Updated: 2025/09/12 21:44:44 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/12 21:59:18 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ static void	sort_stack(t_stack **stack_1, t_stack **stack_2)
 	while (len_stack-- > 3 && check_sorted_list(stack_1))
 	{
 		init_stack(stack_1, stack_2);
+		move_stack(stack_1, stack_2);
 	}
 	sort_three(stack_1, stack_2, );
 }

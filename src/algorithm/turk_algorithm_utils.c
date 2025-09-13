@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 18:12:15 by asando            #+#    #+#             */
-/*   Updated: 2025/09/12 21:45:54 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/12 22:28:51 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,4 +129,34 @@ t_stack	*find_to_push(t_stack **stack)
 	if (current->push_cost < cheapest_node->push_cost)
 		cheapest_node = current;
 	return (cheapest_node);
+}
+
+void	move_stack(t_stack **stack_1, t_stack **stack_2)
+{
+	t_stack *node_to_push;
+
+	node_to_push = find_to_push(stack_1);
+	if (node_to_push->above_median && node_to_push->target->above_median)
+	{
+		while (node_to_push != *stack_1 && node_to_push->target != *stack_2)
+			rotate(stack_1, stack_2, RR);
+	}
+	else if (node_to_push->above_median == 0 && node_to_push->target->above_median == 0)
+	{
+		while (node_to_push != *stack_1 && node_to_push->target != *stack_2)
+			reverse_rotate(stack_1, stack_2, RRR);
+	}
+	set_median_index(stack_1);
+	set_median_index(stack_2);
+	return ;
+}
+
+void	move_to_top(t_stack **stack_1, t_stack **stack_2, t_stack *node_to_push, int num_stack)
+{
+	if (node_to_push->above_median)
+	{
+		while (node_to_push != *stack_1)
+			rotate(stack_1, stack_2, RA);
+	}
+	else
 }
