@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 15:33:57 by asando            #+#    #+#             */
-/*   Updated: 2025/09/12 21:59:18 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/13 13:55:01 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,35 +30,38 @@ t_stack	*max_value(t_stack **stack)
 	return (max);
 }
 
-static void	sort_three(t_stack **stack_1, t_stack **stack_2)
+static void	sort_stack(t_stack **stack_1, t_stack **stack_2)
+{
+	size_t	len_stack;
+	int		i;
+
+	i = 0;
+	len_stack = stack_size(stack_1);
+	while (len_stack-- > 3 && check_sorted_list(stack_1))
+	{
+		if (i < 2)
+			push(stack_1, stack_2, PA);
+		else
+		{
+			init_stack(stack_1, stack_2, 0);
+			move_stack(stack_1, stack_2);
+		}
+	}
+	sort_three(stack_1, stack_2, len_stack);
+}
+
+static void	sort_three(t_stack **stack_1, t_stack **stack_2, size_t len)
 {
 	t_stack	*current;
 
 	current = *stack;
 	if (max_value(stack_1) == *stack_1)
 		rotate(stack_1, stack_2, RA);
-	else if (max_value(stack_1) == (*stack)->next)
+	else if (max_value(stack_1) == (*stack)->next && len >= 3)
 		reverse_rotate(stack_1, stack_2, RRA);
 	if ((*stack)->value > (*stack)->next->value)
 		swap(stack_1, stack_2, SA);
 	return ;
-}
-
-static void	sort_stack(t_stack **stack_1, t_stack **stack_2)
-{
-	size_t	len_stack;
-
-	len_stack = stack_size(stack_1);
-	if (len_stack-- > 3 && check_sorted_list(stack_1))
-		push(stack_1, stack_2, PA);
-	if (len_stack-- > 3 && check_sorted_list(stack_1))
-		push(stack_1, stack_2, PA);
-	while (len_stack-- > 3 && check_sorted_list(stack_1))
-	{
-		init_stack(stack_1, stack_2);
-		move_stack(stack_1, stack_2);
-	}
-	sort_three(stack_1, stack_2, );
 }
 
 void	turk_algo(t_stack **stack_1, t_stack **stack_2)
@@ -68,7 +71,7 @@ void	turk_algo(t_stack **stack_1, t_stack **stack_2)
 	len_stack = stack_size(*stack_1);
 	//swap when it has two data only
 	if (len_stack <= 3)
-		short_three(stack_1, stack_2);
-	if (len_stack > 3)
+		short_three(stack_1, stack_2, len_stack);
+	else
 		sort_stack(stack_1, stack_2);
 }

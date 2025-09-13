@@ -6,29 +6,15 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 18:12:15 by asando            #+#    #+#             */
-/*   Updated: 2025/09/12 22:28:51 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/13 13:57:51 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	init_stack(t_stack **stack_1, t_stack **stack_2, int direction)
-{
-	set_median_index(stack_1);
-	set_median_index(stack_2);
-	if (direction == 0)
-	{
-		set_target(stack_1, stack_2);
-		set_push_cost(stack_2);
-	}
-	else
-		set_target(stack_1, stack_2);
-	return ;
-}
-
 static void	set_median_index(t_stack **stack)
 {
-	size_t	median;
+	size_t	middle_index;
 	size_t	len_stack;
 	t_stack	*current;
 	int		i;
@@ -36,22 +22,21 @@ static void	set_median_index(t_stack **stack)
 	i = 0;
 	current = *stack;
 	len_stack = stack_size(stack);
-	median = len_stack / 2;
+	middle_index = len_stack / 2;
 	while (current->next != *stack)
 	{
 		current->current_index = i;
-		if (i <= median)
-			current->above_median = 1;
+		if (i++ <= median)
+			current->above_midi = 1;
 		else
-			current->above_median = 0;
-		i++;
+			current->above_midi = 0;
 		current = current->next;
 	}
-	current->above_median = 0;
+	current->above_midi = 0;
 	return ;
 }
 
-static void	set_target_a(t_stack **stack_1, t_stack **stack_2)
+static void	set_target_a(t_stack **stack_1, t_stack **stack_2, long target_value)
 {
 	t_stack	*current_a;
 	t_stack	*current_b;
@@ -96,67 +81,32 @@ static void	set_push_cost(t_stack **stack_1, t_stack **stack_2)
 	while (current->next != *stack_1)
 	{
 		current->push_cost = current->current_index;
-		if (current->above_median == 0)
+		if (current->above_midi == 0)
 			current->push_cost = len_stack_1 - current->current_index;
-		if (current->target->above_median)
+		if (current->target->above_midi)
 			current->push_cost += current->target->current_index;
-		else if (current->target->above_median == 0)
+		else if (current->target->above_midi == 0)
 			current->push_cost += len_stack_2 - current->target->current_index;
 		current = current->next;
 	}
 	current->push_cost = len_stack_1 - current->current_index;
-	if (current->target->above_median)
+	if (current->target->above_midi)
 		current->push_cost += current->target->current_index;
-	else if (current->target->above_median == 0)
+	else if (current->target->above_midi == 0)
 		current->push_cost += len_stack_2 - current->target->current_index;
 	return ;
 }
 
-t_stack	*find_to_push(t_stack **stack)
+void	init_stack(t_stack **stack_1, t_stack **stack_2, int direction)
 {
-	t_stack	*cheapest_node;
-	t_stack	*current;
-
-	cheapest_node = *stack;
-	current = *stack;
-	cheapest = INT_MAX;
-	while (current->next != *stack)
-	{
-		if (current->push_cost < cheapest_node->push_cost)
-			cheapest_node = current;
-		current = current->next;
-	}
-	if (current->push_cost < cheapest_node->push_cost)
-		cheapest_node = current;
-	return (cheapest_node);
-}
-
-void	move_stack(t_stack **stack_1, t_stack **stack_2)
-{
-	t_stack *node_to_push;
-
-	node_to_push = find_to_push(stack_1);
-	if (node_to_push->above_median && node_to_push->target->above_median)
-	{
-		while (node_to_push != *stack_1 && node_to_push->target != *stack_2)
-			rotate(stack_1, stack_2, RR);
-	}
-	else if (node_to_push->above_median == 0 && node_to_push->target->above_median == 0)
-	{
-		while (node_to_push != *stack_1 && node_to_push->target != *stack_2)
-			reverse_rotate(stack_1, stack_2, RRR);
-	}
 	set_median_index(stack_1);
 	set_median_index(stack_2);
-	return ;
-}
-
-void	move_to_top(t_stack **stack_1, t_stack **stack_2, t_stack *node_to_push, int num_stack)
-{
-	if (node_to_push->above_median)
+	if (direction == 0)
 	{
-		while (node_to_push != *stack_1)
-			rotate(stack_1, stack_2, RA);
+		set_target(stack_1, stack_2);
+		set_push_cost(stack_2);
 	}
 	else
+		set_target(stack_1, stack_2);
+	return ;
 }

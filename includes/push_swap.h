@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:13:16 by asando            #+#    #+#             */
-/*   Updated: 2025/09/12 18:25:31 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/13 13:35:49 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_stack
 	int				index;
 	int				current_index;
 	int				push_cost;
-	int				above_median;
+	int				above_midi;
 	int				cheapest;
 	struct s_stack	*target;
 	struct s_stack	*next;
