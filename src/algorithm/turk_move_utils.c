@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 13:56:20 by asando            #+#    #+#             */
-/*   Updated: 2025/09/13 14:34:09 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/13 20:51:25 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,24 +45,45 @@ static void	move_to_top(t_stack **stack_1, t_stack **stack_2,
 	return ;
 }
 
+//working on this
+int	last_move_check(t_stack **stack)
+{
+	t_stack *first;
+
+	first = min_value(stack);
+	while (first != *stack && first->above_midi)
+		rotate(stack, NULL, RA);
+	while (first != *stack && first->above_midi == 0)
+		reverse_rotate(stack, NULL, RRA);
+	return (1);
+}
+
 //check if rotate update the while condition stack address
-void	move_stack(t_stack **stack_1, t_stack **stack_2)
+void	move_stack(t_stack **stack_1, t_stack **stack_2, t_op_flag flag)
 {
 	t_stack	*node_to_push;
 
-	node_to_push = find_to_push(stack_1);
-	if (node_to_push->above_midi && node_to_push->target->above_midi)
+	node_to_push = *stack_2;
+	if (flag & PB)
 	{
-		while (node_to_push != *stack_1 && node_to_push->target != *stack_2)
-			rotate(stack_1, stack_2, RR);
+		node_to_push = find_to_push(stack_1);
+		if (node_to_push->above_midi && node_to_push->target->above_midi)
+		{
+			while (node_to_push != *stack_1 && node_to_push->target != *stack_2)
+				rotate(stack_1, stack_2, RR);
+		}
+		else if (node_to_push->above_midi == 0
+			&& node_to_push->target->above_midi == 0)
+		{
+			while (node_to_push != *stack_1 && node_to_push->target != *stack_2)
+				reverse_rotate(stack_1, stack_2, RRR);
+		}
+		move_to_top(stack_1, stack_2, node_to_push);
+		push(stack_1, stack_2, PB);
 	}
-	else if (node_to_push->above_midi == 0
-		&& node_to_push->target->above_midi == 0)
+	else
 	{
-		while (node_to_push != *stack_1 && node_to_push->target != *stack_2)
-			reverse_rotate(stack_1, stack_2, RRR);
+		move_to_top(stack_1, stack_2, node_to_push);
+		push(stack_1, stack_2, PA);
 	}
-	move_to_top(stack_1, stack_2, node_to_push);
-	push(stack_1, stack_2, PB);
-	return ;
 }

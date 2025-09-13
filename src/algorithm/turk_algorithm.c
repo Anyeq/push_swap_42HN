@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 15:33:57 by asando            #+#    #+#             */
-/*   Updated: 2025/09/13 13:55:01 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/13 15:04:08 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,24 @@ t_stack	*max_value(t_stack **stack)
 	return (max);
 }
 
+t_stack	*min_value(t_stack **stack)
+{
+	t_stack	*min;
+	t_stack	*current;
+
+	current = *stack;
+	min = *stack;
+	while (current->next != *stack)
+	{
+		if (current->value < min->value)
+			min = current;
+		current = current->next;
+	}
+	if (current->value < min->value)
+		min = current;
+	return (min);
+}
+
 static void	sort_stack(t_stack **stack_1, t_stack **stack_2)
 {
 	size_t	len_stack;
@@ -44,10 +62,16 @@ static void	sort_stack(t_stack **stack_1, t_stack **stack_2)
 		else
 		{
 			init_stack(stack_1, stack_2, 0);
-			move_stack(stack_1, stack_2);
+			move_stack(stack_1, stack_2, PB);
 		}
 	}
 	sort_three(stack_1, stack_2, len_stack);
+	while (*stack_2)
+	{
+		init_stack(stack_1, stack_2, 1);
+		move_stack(stack_1, stack_2, PA);
+	}
+	set_middle_index(*stack_1);
 }
 
 static void	sort_three(t_stack **stack_1, t_stack **stack_2, size_t len)

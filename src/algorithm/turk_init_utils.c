@@ -6,13 +6,13 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 18:12:15 by asando            #+#    #+#             */
-/*   Updated: 2025/09/13 14:40:56 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/13 15:01:23 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	set_median_index(t_stack **stack)
+void	set_middle_index(t_stack **stack)
 {
 	size_t	middle_index;
 	size_t	len_stack;
@@ -21,6 +21,8 @@ static void	set_median_index(t_stack **stack)
 
 	i = 0;
 	current = *stack;
+	if (*stack == NULL)
+		return ;
 	len_stack = stack_size(stack);
 	middle_index = len_stack / 2;
 	while (current->next != *stack)
@@ -124,14 +126,14 @@ static void	set_push_cost(t_stack **stack_1, t_stack **stack_2)
 
 void	init_stack(t_stack **stack_1, t_stack **stack_2, int direction)
 {
-	set_median_index(stack_1);
-	set_median_index(stack_2);
+	set_middle_index(stack_1);
+	set_middle_index(stack_2);
 	if (direction == 0)
 	{
 		set_target_a(stack_1, stack_2, LONG_MIN);
 		set_push_cost(stack_2);
 	}
 	else
-		set_target_b(stack_2, stack_1, LONG_MAX);
+		set_target_b(stack_1, stack_2, LONG_MAX);
 	return ;
 }
