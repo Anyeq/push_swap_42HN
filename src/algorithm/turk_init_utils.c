@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   turk_algorithm_utils.c                             :+:      :+:    :+:   */
+/*   turk_init_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 18:12:15 by asando            #+#    #+#             */
-/*   Updated: 2025/09/13 13:57:51 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/13 14:40:56 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,35 +36,60 @@ static void	set_median_index(t_stack **stack)
 	return ;
 }
 
-static void	set_target_a(t_stack **stack_1, t_stack **stack_2, long target_value)
+static void	set_target_a(t_stack **stack_1, t_stack **stack_2, long target)
 {
-	t_stack	*current_a;
-	t_stack	*current_b;
-	long	target_value;
+	t_stack	*curr_a;
+	t_stack	*curr_b;
 
-	current_a = *stack_1;
-	current_b = *stack_2;
-	target_value = LONG_MIN;
-	while (current_a->next != *stack_1)
+	curr_a = *stack_1;
+	curr_b = *stack_2;
+	while (curr_a)
 	{
-		while (current_b->next != *stack_2)
+		while (curr_b)
 		{
-			if (current_b->value > target_value && current_b->value < current_a->value)
+			if (curr_b->value > target && curr_b->value < curr_a->value)
 			{
-				target_value = current_b->value;
-				current_a->target = current_b;
+				target = curr_b->value;
+				curr_a->target = curr_b;
 			}
-			current_b = current_b->next;
+			curr_b = curr_b->next;
+			if (curr_b == *stack_2)
+				break ;
 		}
-		if (current_b->value > target_value && current_b->value < current_a->value)
+		if (target == LONG_MIN)
+			curr_a->target = max_value(stack_2);
+		curr_a = curr_a->next;
+		if (curr_a == *stack_1)
+			break ;
+	}
+	return ;
+}
+
+static void	set_target_b(t_stack **stack_1, t_stack **stack_2, long target)
+{
+	t_stack	*curr_a;
+	t_stack	*curr_b;
+
+	curr_a = *stack_1;
+	curr_b = *stack_2;
+	while (curr_b)
+	{
+		while (curr_a)
 		{
-			target_value = current_b->value;
-			current_a->target = current_b;
+			if (curr_a->value < target && curr_a->value > curr_b->value)
+			{
+				target = curr_a->value;
+				curr_b->target = curr_a;
+			}
+			curr_a = curr_a->next;
+			if (curr_a == *stack_1)
+				break ;
 		}
-		if (target_value == LONG_MIN)
-			current_a->target = max_value(stack_2);
-		current_b = current_b->next;
-		current_a = current_a->next;
+		if (target == LONG_MAX)
+			curr_b->target = min_value(stack_1);
+		curr_b = curr_b->next;
+		if (curr_b == *stack_2)
+			break ;
 	}
 	return ;
 }
@@ -103,10 +128,10 @@ void	init_stack(t_stack **stack_1, t_stack **stack_2, int direction)
 	set_median_index(stack_2);
 	if (direction == 0)
 	{
-		set_target(stack_1, stack_2);
+		set_target_a(stack_1, stack_2, LONG_MIN);
 		set_push_cost(stack_2);
 	}
 	else
-		set_target(stack_1, stack_2);
+		set_target_b(stack_2, stack_1, LONG_MAX);
 	return ;
 }
