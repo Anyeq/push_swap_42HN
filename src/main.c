@@ -6,26 +6,11 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:14:57 by asando            #+#    #+#             */
-/*   Updated: 2025/09/13 23:38:10 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/14 20:33:02 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-//static void	print_stack(t_stack **stack)
-//{
-//	t_stack	*curr;
-//
-//	curr = *stack;
-//	while (curr && curr->next != *stack)
-//	{
-//		ft_printf("%d --> index : %d\n", curr->value, curr->index);
-//		curr = curr->next;
-//	}
-//	if (*stack)
-//		ft_printf("%d --> index : %d\n", curr->value, curr->index);
-//	return ;
-//}
 
 int	main(int argc, char **argv)
 {
@@ -38,13 +23,6 @@ int	main(int argc, char **argv)
 	{
 		if (turk_algo(&stack_1, &stack_2) == -1)
 			write(2, "Error in processing the stack!\n", 31);
-		//print_stack(&stack_1, &stack_2);	
-		//swap_ps(&stack_1, &stack_2, SS);
-		//push(&stack_1, &stack_2, PB);
-		//push(&stack_1, &stack_2, PB);
-		//swap(&stack_1, &stack_2, SS);
-		//rotate(&stack_1, &stack_2, RR);
-		//print_stack(&stack_1);	
 	}
 	else
 		write(2, "Error!\n", 7);

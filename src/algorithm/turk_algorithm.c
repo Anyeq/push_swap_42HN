@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 15:33:57 by asando            #+#    #+#             */
-/*   Updated: 2025/09/13 23:24:11 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/14 20:23:34 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,37 @@ t_stack	*min_value(t_stack **stack)
 	return (min);
 }
 
-static void	sort_stack(t_stack **stack_1, t_stack **stack_2, size_t len_stack)
+static void	sort_three(t_stack **stack, size_t len)
+{
+	t_stack	*max;
+
+	max = max_value(stack);
+	if (max == *stack)
+		rotate(stack, NULL, RA);
+	else if (max == (*stack)->next && len >= 3)
+		reverse_rotate(stack, NULL, RRA);
+	if ((*stack)->value > (*stack)->next->value)
+		swap(stack, NULL, SA);
+	return ;
+}
+
+static void	sort_stack(t_stack **stack_1, t_stack **stack_2, int len_stack)
 {
 	int		i;
 
 	i = 0;
-	while (len_stack-- > 3 && check_sorted_list(stack_1))
+	while (len_stack-- > 3 && check_sorted_list(stack_1) == -1)
 	{
 		if (i < 2)
-			push(stack_1, stack_2, PA);
+			push(stack_1, stack_2, PB);
 		else
 		{
 			init_stack(stack_1, stack_2, 1);
 			move_stack(stack_1, stack_2, PB);
 		}
+		i++;
 	}
-	if (len_stack == 3 && check_sorted_list(stack_1))
+	if (len_stack == 3 && check_sorted_list(stack_1) == -1)
 		sort_three(stack_1, len_stack);
 	while (*stack_2)
 	{
@@ -79,29 +94,13 @@ static void	sort_stack(t_stack **stack_1, t_stack **stack_2, size_t len_stack)
 	return ;
 }
 
-static void	sort_three(t_stack **stack, size_t len)
-{
-	t_stack	*current;
-	t_stack	*max;
-
-	current = *stack;
-	max = max_value(stack);
-	if (max == *stack)
-		rotate(stack, NULL, RA);
-	else if (max == (*stack)->next && len >= 3)
-		reverse_rotate(stack, NULL, RRA);
-	if ((*stack)->value > (*stack)->next->value)
-		swap(stack, NULL, SA);
-	return ;
-}
-
 int	turk_algo(t_stack **stack_1, t_stack **stack_2)
 {
-	size_t	len_stack;
+	int	len_stack;
 
 	len_stack = stack_size(stack_1);
 	if (len_stack && len_stack <= 3)
-		short_three(stack_1, len_stack);
+		sort_three(stack_1, len_stack);
 	else if (len_stack)
 		sort_stack(stack_1, stack_2, len_stack);
 	if (check_sorted_list(stack_1) == 0)

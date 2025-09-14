@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 16:37:10 by asando            #+#    #+#             */
-/*   Updated: 2025/08/20 19:57:24 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/14 15:24:50 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ static char	*first_content(char *s)
 		s++;
 	if (*s)
 		return (s);
-	else
-		return (s);
 	return (NULL);
 }
 
@@ -75,11 +73,11 @@ static int	parse_str_format(char *s, t_stack **stack)
 	while (*curr)
 	{
 		res = first_content(curr);
-		if (!(*res))
+		if (!(res))
 			return (0);
 		if (res && is_valid(res, &curr) == 0 && inside_range(res) == 0)
 		{
-			if (stack_add_back(ft_atoi(res), stack) < 0)
+			if (stack_add_back(ft_atoi(res), stack) == -1)
 				return (-1);
 		}
 		else
@@ -95,7 +93,7 @@ int	grab_arg(int n_arg, char **s, t_stack **stack)
 	i = 1;
 	while (i < n_arg)
 	{
-		if (parse_str_format(s[i], stack) < 0)
+		if (parse_str_format(s[i], stack) == -1)
 			return (-1);
 		i++;
 	}

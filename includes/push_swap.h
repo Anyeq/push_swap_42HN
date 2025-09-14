@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:13:16 by asando            #+#    #+#             */
-/*   Updated: 2025/09/13 23:54:46 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/14 20:32:05 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 typedef struct s_stack
 {
 	int				value;
-	int				index;
 	int				current_index;
 	int				push_cost;
 	int				above_midi;
@@ -52,7 +51,7 @@ int		grab_arg(int n_arg, char **s, t_stack **stack);
 //stack utils function
 t_stack	*stack_new(int content);
 void	stack_clean(t_stack **stack);
-size_t	stack_size(t_stack **stack);
+int		stack_size(t_stack **stack);
 int		stack_add_back(int content, t_stack **stack);
 
 //operation function

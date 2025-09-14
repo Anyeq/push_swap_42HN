@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 18:32:01 by asando            #+#    #+#             */
-/*   Updated: 2025/08/23 17:23:23 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/14 20:21:49 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ t_stack	*stack_new(int content)
 	return (new_node);
 }
 
-size_t	stack_size(t_stack **stack)
+int	stack_size(t_stack **stack)
 {
-	size_t	size;
+	int		size;
 	t_stack	*curr;
 
 	size = 0;
@@ -48,7 +48,7 @@ static int	check_double(int content, t_stack **stack, t_stack **new_node)
 	t_stack	*curr;
 
 	curr = *stack;
-	while (curr->next != *stack)
+	while (curr)
 	{
 		if (curr->value == content)
 		{
@@ -56,11 +56,8 @@ static int	check_double(int content, t_stack **stack, t_stack **new_node)
 			return (-1);
 		}
 		curr = curr->next;
-	}
-	if (curr && curr->value == content)
-	{
-		free(*new_node);
-		return (-1);
+		if (curr == *stack)
+			break ;
 	}
 	return (0);
 }
