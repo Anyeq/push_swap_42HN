@@ -6,11 +6,10 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 14:51:03 by asando            #+#    #+#             */
-/*   Updated: 2025/09/15 15:33:17 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/15 21:49:17 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
 #include "checker_bonus.h"
 
 static int	move_stack(char *move, t_stack **stack_1, t_stack **stack_2)
