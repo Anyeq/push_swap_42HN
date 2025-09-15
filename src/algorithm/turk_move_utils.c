@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 13:56:20 by asando            #+#    #+#             */
-/*   Updated: 2025/09/14 20:29:20 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/15 23:11:22 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ static void	move_to_top(t_stack **stack_1, t_stack **stack_2,
 	}
 }
 
-//check if rotate update the while condition stack address
 void	move_stack(t_stack **stack_1, t_stack **stack_2, t_op_flag flag)
 {
 	t_stack	*node_to_push;
