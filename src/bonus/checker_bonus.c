@@ -6,15 +6,14 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 14:51:03 by asando            #+#    #+#             */
-/*   Updated: 2025/09/15 15:28:58 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/15 15:33:17 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "checker_bonus.h"
 
-
-int	move_stack(char *move, t_stack **stack_1, t_stack **stack_2)
+static int	move_stack(char *move, t_stack **stack_1, t_stack **stack_2)
 {
 	if (ft_strncmp(move, "sa\n", 3) == 0)
 		swap(stack_1, stack_2, SA);
@@ -39,7 +38,7 @@ int	move_stack(char *move, t_stack **stack_1, t_stack **stack_2)
 	return (0);
 }
 
-int	execute_move(t_stack **stack_1, t_stack **stack_2)
+static int	execute_move(t_stack **stack_1, t_stack **stack_2)
 {
 	char *res;
 
@@ -69,14 +68,14 @@ int	main(int argc, char **argv)
 	if (grab_arg(argc, argv, &stack_1) == 0)
 	{
 		if (execute_move(stack_1, stack_2) == -1)
-			ft_putstr_fd("ERROR", 1);
+			ft_putstr_fd("Error", 1);
 		if (check_sorted(stack_1) == 0)
 			ft_putstr_fd("OK\n", 1);
 		else
 			ft_putstr_fd("KO\n", 1);
 	}
 	else
-		write(2, "ERROR\n", 7);
+		write(2, "Error\n", 6);
 	if (stack_1)
 		stack_clean(&stack_1);
 	if (stack_2)

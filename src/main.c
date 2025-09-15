@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:14:57 by asando            #+#    #+#             */
-/*   Updated: 2025/09/15 14:08:47 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/15 15:30:12 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 			write(2, "Error!, Stack not sorted\n", 25);
 	}
 	else
-		write(2, "Error!\n", 7);
+		write(2, "Error\n", 6);
 	if (stack_1)
 		stack_clean(&stack_1);
 	return (0);
