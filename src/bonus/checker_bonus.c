@@ -1,13 +1,85 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   checker_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 14:51:03 by asando            #+#    #+#             */
-/*   Updated: 2025/09/15 14:51:04 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/15 15:28:58 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "push_swap.h"
+#include "checker_bonus.h"
 
+
+int	move_stack(char *move, t_stack **stack_1, t_stack **stack_2)
+{
+	if (ft_strncmp(move, "sa\n", 3) == 0)
+		swap(stack_1, stack_2, SA);
+	else if (ft_strncmp(move, "sb\n", 3) == 0)
+		swap(stack_1, stack_2, SB);
+	else if (ft_strncmp(move, "ss\n", 3) == 0)
+		swap(stack_1, stack_2, SS);
+	else if (ft_strncmp(move, "ra\n", 3) == 0)
+		rotate(stack_1, stack_2, RA);
+	else if (ft_strncmp(move, "rb\n", 3) == 0)
+		rotate(stack_1, stack_2, RB);
+	else if (ft_strncmp(move, "rr\n", 3) == 0)
+		rotate(stack_1, stack_2, RR);
+	else if (ft_strncmp(move, "rra\n", 4) == 0
+		reverse_rotate(stack_1, stack_2, RRA);
+	else if (ft_strncmp(move, "rrb\n", 4) == 0)
+		reverse_rotate(stack_1, stack_2, RRB);
+	else if (ft_strncmp(move, "rrr\n", 4) == 0)
+		reverse_rotate(stack_1, stack_2, RRR);
+	else
+		return (-1);
+	return (0);
+}
+
+int	execute_move(t_stack **stack_1, t_stack **stack_2)
+{
+	char *res;
+
+	res = NULL;
+	while (1)
+	{
+		res = get_next_line(STDIN_FILENO);
+		if (res == NULL)
+			return (0);
+		if (move_stack(res, stack_1, stack_2) == -1)
+		{
+			free(res);
+			return (-1);
+		}
+		free(res);
+	}
+	return (0);
+}
+
+int	main(int argc, char **argv)
+{
+	t_stack	*stack_1;
+	t_stack	*stack_2;
+
+	stack_1 = NULL;
+	stack_2 = NULL;
+	if (grab_arg(argc, argv, &stack_1) == 0)
+	{
+		if (execute_move(stack_1, stack_2) == -1)
+			ft_putstr_fd("ERROR", 1);
+		if (check_sorted(stack_1) == 0)
+			ft_putstr_fd("OK\n", 1);
+		else
+			ft_putstr_fd("KO\n", 1);
+	}
+	else
+		write(2, "ERROR\n", 7);
+	if (stack_1)
+		stack_clean(&stack_1);
+	if (stack_2)
+		stack_clean(&stack_2);
+	return (0);
+}
