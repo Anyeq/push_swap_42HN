@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 16:16:36 by asando            #+#    #+#             */
-/*   Updated: 2025/08/23 16:54:08 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/16 08:40:33 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static int	reverse_rotate_ps(t_stack **stack)
 	return (0);
 }
 
-void	reverse_rotate(t_stack **stack_1, t_stack **stack_2, t_op_flag flag)
+void	reverse_rotate(t_stack **stack_1, t_stack **stack_2, t_op_flag flag,
+		int p_out)
 {
 	int	rev_rota;
 	int	rev_rotb;
@@ -31,17 +32,17 @@ void	reverse_rotate(t_stack **stack_1, t_stack **stack_2, t_op_flag flag)
 	{
 		rev_rota = reverse_rotate_ps(stack_1);
 		rev_rotb = reverse_rotate_ps(stack_2);
-		if (rev_rota == 0 || rev_rotb == 0)
+		if ((rev_rota == 0 || rev_rotb == 0) && p_out)
 			ft_printf("rrr\n");
 	}
 	else if (flag & RRA)
 	{
-		if (reverse_rotate_ps(stack_1) == 0)
+		if (reverse_rotate_ps(stack_1) == 0 && p_out)
 			ft_printf("rra\n");
 	}
 	else if (flag & RRB)
 	{
-		if (reverse_rotate_ps(stack_2) == 0)
+		if (reverse_rotate_ps(stack_2) == 0 && p_out)
 			ft_printf("rrb\n");
 	}
 	return ;

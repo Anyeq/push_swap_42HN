@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 14:51:03 by asando            #+#    #+#             */
-/*   Updated: 2025/09/15 23:44:21 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/16 08:46:56 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,27 @@ static int	check_sorted(t_stack **stack)
 static int	move_input(char *move, t_stack **stack_1, t_stack **stack_2)
 {
 	if (ft_strncmp(move, "sa\n", 3) == 0)
-		swap(stack_1, stack_2, SA);
+		swap(stack_1, stack_2, SA, 0);
 	else if (ft_strncmp(move, "sb\n", 3) == 0)
-		swap(stack_1, stack_2, SB);
+		swap(stack_1, stack_2, SB, 0);
 	else if (ft_strncmp(move, "ss\n", 3) == 0)
-		swap(stack_1, stack_2, SS);
+		swap(stack_1, stack_2, SS, 0);
 	else if (ft_strncmp(move, "pa\n", 3) == 0)
-		push(stack_1, stack_2, PA);
+		push(stack_1, stack_2, PA, 0);
 	else if (ft_strncmp(move, "pb\n", 3) == 0)
-		push(stack_1, stack_2, PB);
+		push(stack_1, stack_2, PB, 0);
 	else if (ft_strncmp(move, "ra\n", 3) == 0)
-		rotate(stack_1, stack_2, RA);
+		rotate(stack_1, stack_2, RA, 0);
 	else if (ft_strncmp(move, "rb\n", 3) == 0)
-		rotate(stack_1, stack_2, RB);
+		rotate(stack_1, stack_2, RB, 0);
 	else if (ft_strncmp(move, "rr\n", 3) == 0)
-		rotate(stack_1, stack_2, RR);
+		rotate(stack_1, stack_2, RR, 0);
 	else if (ft_strncmp(move, "rra\n", 4) == 0)
-		reverse_rotate(stack_1, stack_2, RRA);
+		reverse_rotate(stack_1, stack_2, RRA, 0);
 	else if (ft_strncmp(move, "rrb\n", 4) == 0)
-		reverse_rotate(stack_1, stack_2, RRB);
+		reverse_rotate(stack_1, stack_2, RRB, 0);
 	else if (ft_strncmp(move, "rrr\n", 4) == 0)
-		reverse_rotate(stack_1, stack_2, RRR);
+		reverse_rotate(stack_1, stack_2, RRR, 0);
 	else
 		return (-1);
 	return (0);

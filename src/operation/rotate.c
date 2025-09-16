@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 19:07:00 by asando            #+#    #+#             */
-/*   Updated: 2025/08/23 16:54:21 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/16 08:37:39 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	rotate_ps(t_stack **stack)
 	return (0);
 }
 
-void	rotate(t_stack **stack_1, t_stack **stack_2, t_op_flag flag)
+void	rotate(t_stack **stack_1, t_stack **stack_2, t_op_flag flag, int p_out)
 {
 	int	rot_a;
 	int	rot_b;
@@ -31,17 +31,17 @@ void	rotate(t_stack **stack_1, t_stack **stack_2, t_op_flag flag)
 	{
 		rot_a = rotate_ps(stack_1);
 		rot_b = rotate_ps(stack_2);
-		if (rot_a == 0 || rot_b == 0)
+		if ((rot_a == 0 || rot_b == 0) && p_out)
 			ft_printf("rr\n");
 	}
 	else if (flag & RA)
 	{
-		if (rotate_ps(stack_1) == 0)
+		if (rotate_ps(stack_1) == 0 && p_out)
 			ft_printf("ra\n");
 	}
 	else if (flag & RB)
 	{
-		if (rotate_ps(stack_2) == 0)
+		if ((rotate_ps(stack_2) == 0) && p_out)
 			ft_printf("rb\n");
 	}
 	return ;
