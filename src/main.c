@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:14:57 by asando            #+#    #+#             */
-/*   Updated: 2025/09/15 15:30:12 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/16 21:43:59 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ int	main(int argc, char **argv)
 
 	stack_1 = NULL;
 	stack_2 = NULL;
+	if (argc == 1)
+		return (0);
 	if (grab_arg(argc, argv, &stack_1) == 0)
 	{
 		if (turk_algo(&stack_1, &stack_2) == -1)
-			write(2, "Error!, Stack not sorted\n", 25);
+			write(2, "Error!, stack not sorted\n", 25);
 	}
 	else
 		write(2, "Error\n", 6);
