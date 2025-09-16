@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 15:33:57 by asando            #+#    #+#             */
-/*   Updated: 2025/09/16 08:44:10 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/16 09:13:40 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	sort_three(t_stack **stack, size_t len)
 	max = max_value(stack);
 	if (max == *stack)
 		rotate(stack, NULL, RA, 1);
-	else if (max == (*stack)->next && len >= 3)
+	else if (max == (*stack)->next && len == 3)
 		reverse_rotate(stack, NULL, RRA, 1);
 	if ((*stack)->value > (*stack)->next->value)
 		swap(stack, NULL, SA, 1);

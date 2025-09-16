@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:13:16 by asando            #+#    #+#             */
-/*   Updated: 2025/09/16 08:42:51 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/16 09:04:36 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,15 @@ typedef enum e_op_flag
 {
 	SA = 1 << 0,
 	SB = 1 << 1,
-	SS = SA || SB,
+	SS = SA | SB,
 	PA = 1 << 2,
 	PB = 1 << 3,
 	RA = 1 << 4,
 	RB = 1 << 5,
-	RR = RA || RB,
+	RR = RA | RB,
 	RRA = 1 << 6,
 	RRB = 1 << 7,
-	RRR = RRA || RRB
+	RRR = RRA | RRB
 }	t_op_flag;
 
 //main function

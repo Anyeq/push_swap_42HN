@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 19:07:00 by asando            #+#    #+#             */
-/*   Updated: 2025/09/16 08:37:39 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/16 09:13:07 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	rotate(t_stack **stack_1, t_stack **stack_2, t_op_flag flag, int p_out)
 
 	rot_a = 1;
 	rot_b = 1;
-	if (flag & RR)
+	if ((flag & RR) == RR)
 	{
 		rot_a = rotate_ps(stack_1);
 		rot_b = rotate_ps(stack_2);

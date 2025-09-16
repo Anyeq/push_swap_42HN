@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 16:16:36 by asando            #+#    #+#             */
-/*   Updated: 2025/09/16 08:40:33 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/16 09:13:36 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	reverse_rotate(t_stack **stack_1, t_stack **stack_2, t_op_flag flag,
 
 	rev_rota = 1;
 	rev_rotb = 1;
-	if (flag & RRR)
+	if ((flag & RRR) == RRR)
 	{
 		rev_rota = reverse_rotate_ps(stack_1);
 		rev_rotb = reverse_rotate_ps(stack_2);

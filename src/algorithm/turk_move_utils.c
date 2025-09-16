@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 13:56:20 by asando            #+#    #+#             */
-/*   Updated: 2025/09/16 08:45:53 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/16 08:48:12 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,11 +113,11 @@ void	move_stack(t_stack **stack_1, t_stack **stack_2, t_op_flag flag)
 				reverse_rotate(stack_1, stack_2, RRR, 1);
 		}
 		move_to_top(stack_1, stack_2, node_to_push, 1);
-		push(stack_1, stack_2, PB);
+		push(stack_1, stack_2, PB, 1);
 	}
 	else
 	{
 		move_to_top(stack_1, stack_2, node_to_push, 2);
-		push(stack_1, stack_2, PA);
+		push(stack_1, stack_2, PA, 1);
 	}
 }
