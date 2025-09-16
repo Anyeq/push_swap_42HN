@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 18:32:01 by asando            #+#    #+#             */
-/*   Updated: 2025/09/16 09:28:12 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/16 09:48:10 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	stack_add_back(int content, t_stack **stack)
 
 void	stack_clean(t_stack **stack)
 {
-	t_stack *curr;
+	t_stack	*curr;
 	t_stack	*to_delete;
 
 	curr = *stack;

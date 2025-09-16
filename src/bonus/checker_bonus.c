@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 14:51:03 by asando            #+#    #+#             */
-/*   Updated: 2025/09/16 08:46:56 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/16 09:47:17 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	move_input(char *move, t_stack **stack_1, t_stack **stack_2)
 
 static int	execute_move(t_stack **stack_1, t_stack **stack_2)
 {
-	char *res;
+	char	*res;
 
 	res = NULL;
 	while (1)
