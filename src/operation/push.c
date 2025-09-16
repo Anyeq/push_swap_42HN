@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 16:01:33 by asando            #+#    #+#             */
-/*   Updated: 2025/09/16 08:40:16 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/16 09:25:38 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,22 +82,6 @@ void	push(t_stack **stack_1, t_stack **stack_2, t_op_flag flag,
 		push_ps(stack_2, stack_1);
 		if (p_out)
 			ft_printf("pb\n");
-	}
-	return ;
-}
-
-void	push_all(t_stack **stack_1, t_stack **stack_2, t_op_flag flag,
-		int p_out)
-{
-	if (flag & PA)
-	{
-		while (*stack_2)
-			push(stack_1, stack_2, PA, p_out);
-	}
-	else if (flag & PB)
-	{
-		while (*stack_1)
-			push(stack_1, stack_2, PB, p_out);
 	}
 	return ;
 }

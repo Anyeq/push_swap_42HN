@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 15:33:57 by asando            #+#    #+#             */
-/*   Updated: 2025/09/16 09:13:40 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/16 09:39:32 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,15 @@ static void	sort_stack(t_stack **stack_1, t_stack **stack_2, int len_stack)
 	i = 0;
 	while (len_stack-- > 3 && check_sorted_list(stack_1) == -1)
 	{
-		if (i < 2)
+		if (i++ < 2)
 			push(stack_1, stack_2, PB, 1);
 		else
 		{
 			init_stack(stack_1, stack_2, 1);
 			move_stack(stack_1, stack_2, PB);
 		}
-		i++;
+		if (len_stack == 3)
+			break ;
 	}
 	if (len_stack == 3 && check_sorted_list(stack_1) == -1)
 		sort_three(stack_1, len_stack);
@@ -91,7 +92,6 @@ static void	sort_stack(t_stack **stack_1, t_stack **stack_2, int len_stack)
 	}
 	set_middle_index(stack_1);
 	last_move(stack_1);
-	return ;
 }
 
 int	turk_algo(t_stack **stack_1, t_stack **stack_2)

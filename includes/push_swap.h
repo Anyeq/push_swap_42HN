@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:13:16 by asando            #+#    #+#             */
-/*   Updated: 2025/09/16 09:04:36 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/16 09:25:58 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ int		stack_add_back(int content, t_stack **stack);
 //operation function
 void	swap(t_stack **stack_1, t_stack **stack_2, t_op_flag flag, int p_out);
 void	push(t_stack **stack_1, t_stack **stack_2, t_op_flag flag, int p_out);
-void	push_all(t_stack **stack_1, t_stack **stack_2, t_op_flag flag,
-			int p_out);
 void	rotate(t_stack **stack_1, t_stack **stack_2, t_op_flag flag, int p_out);
 void	reverse_rotate(t_stack **stack_1, t_stack **stack_2, t_op_flag flag,
 			int p_out);
