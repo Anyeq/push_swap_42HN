@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:25:06 by asando            #+#    #+#             */
-/*   Updated: 2025/09/16 09:10:00 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/16 09:18:45 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	swap(t_stack **stack_1, t_stack **stack_2, t_op_flag flag, int p_out)
 	swp_b = 1;
 	if ((flag & SS) == SS)
 	{
-		ft_putstr_fd("Hello guys", 1);
 		swp_a = swap_ps(stack_1);
 		swp_b = swap_ps(stack_2);
 		if ((swp_a == 0 || swp_b == 0) && p_out)
