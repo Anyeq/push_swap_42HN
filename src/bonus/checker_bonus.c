@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 14:51:03 by asando            #+#    #+#             */
-/*   Updated: 2025/09/16 22:09:02 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/18 15:46:11 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	main(int argc, char **argv)
 	stack_2 = NULL;
 	if (grab_arg(argc, argv, &stack_1) == 0 && argc != 1)
 	{
-		if (execute_move(&stack_1, &stack_2) == -1)
+		if (stack_1 == NULL || execute_move(&stack_1, &stack_2) == -1)
 		{
 			ft_putstr_fd("Error\n", 2);
 			return (0);
