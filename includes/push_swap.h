@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:13:16 by asando            #+#    #+#             */
-/*   Updated: 2025/09/21 17:25:38 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/21 22:01:14 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ int		check_sorted_list(t_stack **stack);
 void	move(t_stack **stack_1, t_stack **stack_2, t_stack *node);
 void	move_top_1(t_stack **stack_1, t_stack **stack_2, t_stack *node);
 void	move_top_2(t_stack **stack_1, t_stack **stack_2, t_stack *node);
+void	push_cost_optimizer(t_stack *current, int target_push_cost);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:27:03 by asando            #+#    #+#             */
-/*   Updated: 2025/09/21 21:20:36 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/21 21:59:43 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,31 +50,7 @@ void	move_top_2(t_stack **stack_1, t_stack **stack_2, t_stack *node)
 		reverse_rotate(stack_1, stack_2, RRA, 1);
 }
 
-void	push_cost_optimizer(t_stack **stack_1, t_stack **stack_2)
-{
-	int		len_stack_1;
-	int		len_stack_2;
-	t_stack	*current;
-	int		target_push_cost;
-
-	current = *stack_1;
-	len_stack_1 = stack_size(stack_1);
-	len_stack_2 = stack_size(stack_2);
-	target_push_cost = 0;
-	while (current)
-	{
-		current->push_cost = current->current_index;
-		if (current->above_midi == 0)
-			current->push_cost = len_stack_1 - current->current_index;
-		current = current->next;
-		if (current == *stack_1)
-			break ;
-	}
-	return ;
-}
-
-void	push_cost_optimizer(t_stack *current, int node_push_cost,
-						int target_push_cost)
+void	push_cost_optimizer(t_stack *current, int target_push_cost)
 {
 	if (current->target->above_midi && current->above_midi)
 	{

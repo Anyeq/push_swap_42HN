@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 18:12:15 by asando            #+#    #+#             */
-/*   Updated: 2025/09/14 20:30:35 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/21 22:00:09 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,20 +102,20 @@ static void	set_push_cost(t_stack **stack_1, t_stack **stack_2)
 {
 	int		len_stack_1;
 	int		len_stack_2;
+	int		target_push_cost;
 	t_stack	*current;
 
 	current = *stack_1;
 	len_stack_1 = stack_size(stack_1);
 	len_stack_2 = stack_size(stack_2);
+	target_push_cost = 0;
 	while (current)
 	{
 		current->push_cost = current->current_index;
 		if (current->above_midi == 0)
 			current->push_cost = len_stack_1 - current->current_index;
-		if (current->target->above_midi)
-			current->push_cost += current->target->current_index;
-		else if (current->target->above_midi == 0)
-			current->push_cost += len_stack_2 - current->target->current_index;
+		target_push_cost = len_stack_2 - current->target->current_index;
+		push_cost_optimizer(current, target_push_cost);
 		current = current->next;
 		if (current == *stack_1)
 			break ;
