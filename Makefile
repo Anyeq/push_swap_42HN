@@ -6,7 +6,7 @@
 #    By: asando <asando@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/17 16:44:37 by asando            #+#    #+#              #
-#    Updated: 2025/09/15 23:45:11 by asando           ###   ########.fr        #
+#    Updated: 2025/09/21 17:26:43 by asando           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ MAIN_FUNC_DIR = $(SRC_DIR)/main_function
 # Files to be compiled
 OPERATION_FUNC_FILES = swap.c push.c rotate.c reverse_rotate.c
 ALGORITHM_FUNC_FILES = turk_algorithm.c turk_init_utils.c \
-					   turk_move_utils.c
+					   turk_move_utils.c turk_optimizer.c
 MAIN_FUNC_FILES = grab_arg.c stack_utils.c
 BONUS_FUNC_FILES = checker_bonus.c
 MAIN = main.c
