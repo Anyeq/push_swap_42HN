@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 15:33:57 by asando            #+#    #+#             */
-/*   Updated: 2025/09/16 09:39:32 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/22 08:19:19 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	sort_stack(t_stack **stack_1, t_stack **stack_2, int len_stack)
 	int		i;
 
 	i = 0;
-	while (len_stack-- > 3 && check_sorted_list(stack_1) == -1)
+	while (len_stack > 3)
 	{
 		if (i++ < 2)
 			push(stack_1, stack_2, PB, 1);
@@ -80,8 +80,7 @@ static void	sort_stack(t_stack **stack_1, t_stack **stack_2, int len_stack)
 			init_stack(stack_1, stack_2, 1);
 			move_stack(stack_1, stack_2, PB);
 		}
-		if (len_stack == 3)
-			break ;
+		len_stack--;
 	}
 	if (len_stack == 3 && check_sorted_list(stack_1) == -1)
 		sort_three(stack_1, len_stack);
@@ -101,7 +100,7 @@ int	turk_algo(t_stack **stack_1, t_stack **stack_2)
 	len_stack = stack_size(stack_1);
 	if (len_stack && len_stack <= 3)
 		sort_three(stack_1, len_stack);
-	else if (len_stack)
+	else if (len_stack && check_sorted_list(stack_1) == -1)
 		sort_stack(stack_1, stack_2, len_stack);
 	if (check_sorted_list(stack_1) == 0)
 		return (0);

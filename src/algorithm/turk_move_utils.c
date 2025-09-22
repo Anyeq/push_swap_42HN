@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 13:56:20 by asando            #+#    #+#             */
-/*   Updated: 2025/09/21 17:24:15 by asando           ###   ########.fr       */
+/*   Updated: 2025/09/21 22:25:50 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static t_stack	*find_to_push(t_stack **stack)
 	{
 		if (current->push_cost < cheapest_node->push_cost)
 			cheapest_node = current;
+		if (current->push_cost == 0)
+			break ;
 		current = current->next;
 		if (current == *stack)
 			break ;
